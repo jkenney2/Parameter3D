@@ -1,0 +1,53 @@
+Parameter3D Instructions
+
+Two files are provided for installation:  Setup and Parameter3DSetup.  Setup will install Microsoft .NET 3.5 on systems that do not already have .NET 3.5 (or higher), and will then run Parameter3DSetup.  To run Setup, copy both files to the desktop and double-click Setup.  For systems that already have .NET 3.5 or higher, only Parameter3DSetup is needed. Copy it to the desktop and double-click. 
+
+Parameter3D creates 3D objects based on parametric equations, and allows the user to manipulate individual objects or the entire group of objects.
+
+To create an object using standard parametric equations, make sure "Extrusion" is not checked. Enter functions x(s,t), y(s,t), z(s,t) where s and t are the two parameters.  If the surface is to be "closed" with respect to s and/or t, check the wrap S and/or wrap T box(es).  Enter minimum and maximum values for s and t, as well as a color.  Also enter grid size (number of facets) in s and t directions.  Then click "Add Model".
+
+To create an "extruded" object, check the "Extrusion" box.  Enter functions that define the centerline of the extruded object, x(s), y(s), and z(s).  Also enter functions that define the shape of the extruded object in a plane perpendicular to the extrusion centerline: x'(s,t), y'(s,t).  The x' and y' axes are perpendicular to the centerline.  Again enter minimum and maximum values for s and t, grid sizes, set the wrap S and wrap T checkboxes as appropriate, and set the color.  Then click "Add Model".
+
+Examples:
+
+For a sphere, use standard parametric equations:
+x(s,t) = Cos(s) * Cos(t)
+y(s,t) = Sin(s) * Cos(t)
+z(s,t) = Sin(t)
+Smin = 0, Smax = 6.28, Tmin = -1.57, Tmax = 1.57  Grid Size S: 20, T: 10.
+wrap S: checked.  wrap T: unchecked.  Extrusion: unchecked.
+
+For a helix, using an extrusion:
+x(s) = Cos(2*s)
+y(s) = Sin(2*s)
+z(s) = s/6.28
+x'(s,t) = .2 * Sin(t)
+y'(s,t) = .2 * Cos(t)
+Smin = -6.28, Smax = 6.28, Tmin = 0, Tmax = 6.28, Grid Size S: 60, T: 10.
+wrap S: unchecked  wrap T: checked. Extrusion: checked.
+
+Note that each object has a "front" surface (colored using the selected color) and a "back" surface (colored gray).  In most cases, one would desire that the outside of a closed shape is the front surface.  The front surface can be determined using the "right hand rule".  Take points P(s,t), P(s+ds,t), and P(s+ds,t+dt) and superimpose on them the pinky finger side of the partly closed right hand, from palm to fingertip, with thumb extended.  The thumb will point to the front of the surface.
+
+If a set of equations yields front and back surfaces that are the reverse desired, the following  action istypically corrective: Switch the Tmin and Tmax values (e.g. from Tmin=-1.57 and Tmax=1.57 to Tmin=1.57 and Tmax=-1.57).  The second option is typically easier.  Note that Smin and Tmin do not actually have to be smaller than Smax and Tmax; these values are endpoints rather than true minimum and maximum values.
+
+Instead of creating objects directly from equations, Parameter3D can also create several pre-defined shapes (e.g., sphere, cylinder).  To accomplish this, use the "Shape" menu, select desired shape.
+
+The appearance of created objects is much more pleasing when spot lighting or directional lighting is applied in addition to the low level ambient lighting.  There are 6 spot lights and 6 directional lights provided.  Turn these on and off using the check boxes below the "Spot Lights" and Directional Lights" labels in the control panel.
+
+The camera through which the 3D objects are viewed is an orthogonal camera by default, but either an orthogonal or perspective camera can be selected using the camera radio buttons on the control panel.  Camera zoom is controlled with a slider, and for the perspective camera, the distance from the origin to the camera can be adjusted with a second slider.  Note that the camera is always positioned along the positive z axis, looking toward the origin.  Thus, when viewing the group of objects, the x-axis point to the right, the y-axis upward, and the z-axis toward the user.
+
+After an object is created, it is selected for manipulation.  To select any other object, double-click that object on the image.  If an object cannot be double-clicked because it is completely surrounded by another object, it can be selected using the Selection Helper in the View menu.  To identify the currently selected object, check the "Highlight" box to make this object bright white.
+
+Manipulation of individual objects (or the whole group of objects) is primarily accomplished by mouse movement over the image with the left button held down.  The type of manipulation to be performed is referred to as the "mode", and can be selected with the "Mode" menu, or with the context menu (right click over the image).  Available modes are:  Rotate Object (rotate only the selected object), Rotate Group (rotate the entire group of objects), Drag Object, Drag Group, Scale Object (symmetrically change the size of the selected object), Scale group, Stretch, and StretchXY.  In the stretch mode the object is stretched (or compressed) along only one of its native axes (X, Y, or Z) depending on the direction of mouse movement.  In the StretchXY mode, the object is stretched or compressed along its native X and Y axes simultaneously.  This mode is useful for symmetrically changing the radius of an object whose cross-section in its native XY plane is circular (e.g. a cylinder). 
+
+To remove the currently selected object from the group, click the "Remove" button, or select "Remove" from the "Object" menu.  To remove all objects, click the "Reset" button.  Besides "Remove", the "Object" menu provides several other operations that can be performed on the selected object.  Some objects created by the "Shape" menu consist of several separate surfaces combined to form one object. The "Split Object" menu item splits such a compound object into separate objects.  "Reset Transform" resets the transform of the current object.  "Display Transform" displays the affine transform matrix of the current object (the fourth column, which always contains 0 0 0 1, is omitted).  "Change Color" changes the color of the current object to the current selection in the "Color" text box.
+
+The "File" menu provides several file manipulation options.  "Save" saves the group of objects as a parameter object data file (.p3D).  "Open" opens a parameter object data file, generates the 3D object or objects within, and adds the object/objects to the current group of objects.  "Save Image" saves the current image as a JPEG (.jpg) file.
+
+The "View" menu provides the following options:  "Background Color" opens a dialog to change the background color.  "Selection Helper" opens a dialog which aids in selecting a desired object.  This can be necessary if an object becomes completely surrounded by one or more other objects (and thus invisible).  The list box in the selection helper dialog enumerates the objects in the group.  Clicking any item in the list box makes that item visible, and all of the other items invisible.  Click OK to exit the selection helper dialog, retaining the selection made in the list box.  After exiting the dialog, the selected item can be dragged to a location where it is visible.
+
+
+
+
+
+

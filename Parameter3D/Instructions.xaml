@@ -1,0 +1,183 @@
+﻿<Window x:Class="Parameter3D.Instructions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Instructions" Height="600" Width="800">
+    <Grid>
+        <FlowDocumentScrollViewer >
+            <FlowDocument >
+                <Paragraph FontSize="22" FontWeight="Bold" TextAlignment="Center">Instructions</Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold"  TextAlignment="Left">Introduction</Paragraph>
+                <Paragraph FontSize="14">
+                    Parameter3D is a program which allows the user to create and manipulate 3-dimensional objects using pre-defined primitive shapes, supplied or user-created templates, or user-supplied parameteric equations.
+                </Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold">
+                    Creating Objects
+                </Paragraph>
+                <Paragraph FontSize="14">
+                    The simplest method of creating a 3D object is to select the desired color in the "Color Selection Box", 
+                    then select a primitive shape (for example, a sphere or a cube) from the "Shapes Toolbar".  
+                    This creates an object with no required input of equations or numeric parameters.  The "Shapes Menu" is 
+                    an alternative to the Shapes Toolbar.  It includes all of the shapes included in the shapes toolbar, and 
+                    numerous additional shapes.  The Shapes Toolbar
+                    and Shapes Menu make use of Parameter 3D Data Files (.p3d).  As discussed below, these files can also be
+                    created by the user to save objects for later use.
+                </Paragraph>
+                <Paragraph FontSize="14">
+                    The second-simplest method of creating an object is with the "Templates Menu".  Selecting an item from the
+                    templates menu opens a dialog which requires user input of parameters to determine dimensions and other features
+                    of the created object.  For example, the template for a sphere requires input of the desired radius, while the
+                    template for a block requires the lengths of the three sides.  The template dialog also requires that the color
+                    be selected.  The Templates Menu provides access to templates than are included as part of the Parameter 3D
+                    installation.  Templates (.p3t files) can also be created by the user.
+                </Paragraph>
+                <Paragraph FontSize="14">
+                    Finally, a 3D object can be created by entering a set of parametric equations that define a surface in three 
+                    dimensions.
+                    <Italic>( Not interested in entering equations?  Then skip to the "Selecting Objects" section below. )</Italic> Such a set of equations must provide a definition of the points (x,y,z) along the surface as a
+                    function of two parameters, named "s" and "t".  For standard parametric equations the user defines three functions:  x(s,t),
+                    y(s,t), and z(s,t).  A slightly more complex approach is also supported:  extrusion equations.
+                    For extrusion equations, the user defines three functions which describe the centerline of the extrusion  
+                    {x(s), y(s), z(s)} as well as two functions which define the cross-sectional shape of the extrusion as a given value
+                    of s {x'(s,t), y'(s,t)}.  The equations and supporting data are entered into the control panel at the left of the 
+                    screen.  In addition to equations, the beginning and ending values for s and t must be entered (Smin, Smax, Tmin, 
+                    Tmax).  The Number of facets (Grid Size) in the s and t dimensions must also be entered, and a color must be selected.  
+                    Pressing the "Add Object" button generates the new object.
+                </Paragraph>
+                <Paragraph FontSize="14">
+                    Note that the 3D surfaces are formed of multiple triangles, and that each surface has a "front" and a "back" side.
+                    The front of the surface bears the color selected when the surface is created.  The back is gray in color by 
+                    default, but this can be changed, as described in detail below.  The front side is determined using the 
+                    "right hand rule".  For those interested, it works as follows.  Place the pinky side of the partly closed 
+                    hand along points at (s,t), (s+ds,t), (s+ds,t+dt).  The extended thumb will indicate the front side.  If the
+                    front and back sides of a surface are the reverse of desired, switching the values of TMin and TMax will 
+                    be corrective.
+                </Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold">Examples</Paragraph>
+                <Paragraph FontSize="14">The following input will create a donut using standard parametric equations:
+                    <LineBreak/>x(s,t) = Cos(s) * (1 + .3 * Cos(t))
+                    <LineBreak/>y(s,t) = Sin(s) * (1 + .3 * Cos(t))
+                    <LineBreak/>z(s,t) = .3 * Cos(t)
+                    <LineBreak/>SMin = 0, SMax = 2*pi, TMin = 0, TMax = 2*pi
+                    <LineBreak/>GridSizeS = 40, GridSizeT = 20.  Extrustion checkbox:  unchecked.
+                </Paragraph>
+                <Paragraph FontSize="14">
+                    The following input will create an identical donut using extrusion equations:
+                    <LineBreak/>x(s) = Cos(s)
+                    <LineBreak/>y(s) = Sin(s)
+                    <LineBreak/>z(s) = 0
+                    <LineBreak/>x'(s,t) = 0.3 * Cos(t)
+                    <LineBreak/>y'(s,t) = 0.3 * Sin(t)
+                    <LineBreak/>SMin, SMax, TMin, TMax, GridSizeS, GridSizeT: same as those used above.  Extrusion checkbox: checked.
+                </Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold">Selecting Objects</Paragraph>
+                <Paragraph FontSize="14">
+                    When an object is first created, it automatically becomes the "selected object".  To select a different object,
+                    double-click on the desired object with the left mouse button.  In addition to maintaining a selected object, 
+                    Parameter 3D also maintains a "selected list" of objects.  The selected object is always the first element of the 
+                    selected list.  When a new object is selected as the selected object, the list is cleared (except for the new 
+                    selected object).  To add an object to the selected list, double-click over the object with the Ctrl button 
+                    pressed.  The selected object is the target of many of the manipulations and operations described in the following 
+                    paragraphs.  The selected list is used only for combining multiple objects into a single object.  This 
+                    operation is described below.  The "Highlight" group box is provided in the control panel (left side of the 
+                    user interface) to help keep track of which object is the selected object, and which objects are
+                    included in the selected list.  Clicking the "Selection" radio button in this group box causes the selected object 
+                    to be "highlighted"--that is, it temporarily becomes bright white in color.  Clicking the "List" radio button 
+                    causes all objects in the selected list to be highlighted.  Clicking the "None" radio button turns off all 
+                    highlighting.
+                </Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold">
+                    Manipulating Objects
+                </Paragraph>
+                <Paragraph FontSize="14">
+                    Three dimensional objects are manipulated (moved around in space, resized, etc.) by left-dragging 
+                    with the mouse.  The action performed by left-dragging is referred to as the "mode".  The mode
+                    is set using the "Mode Menu" or by using the context menu (right-click).  The following modes are 
+                    available:
+                </Paragraph>
+                <Paragraph FontSize="14">Rotate Group:  the entire group of objects is rotated in space.</Paragraph>
+                <Paragraph FontSize="14">Rotate Object:  the selected object is rotated.</Paragraph>
+                <Paragraph FontSize="14">Drag Group:  the entire group of objects is dragged in space.</Paragraph>
+                <Paragraph FontSize="14">Drag Object:  the selected object is dragged.</Paragraph>
+                <Paragraph FontSize="14">Scale Object: the selected object is resized.</Paragraph>
+                <Paragraph FontSize="14">Scale Group: the entire group of objects is resized.></Paragraph>
+                <Paragraph FontSize="14">Scale Object X, Y, or Z Axis:  the selected object is elongated or shortened
+                only along its native X, Y, or Z axis, depending on the direction of dragging.
+                </Paragraph>
+                <Paragraph FontSize="14">Scale Object Z Axis:  the selected object is scaled along its native Z axis.</Paragraph>
+                <Paragraph FontSize="14">Scale Object X and Y Axes: the selected object is scaled simultaneously along its
+                native X and Y axes.</Paragraph>
+                <Paragraph FontSize="14">Skew Object:  the selected object is skewed.</Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold">The Object Menu</Paragraph>
+                <Paragraph FontSize="14">
+                    The Object Menu provides multiple operations, most of which act only on the selected object, as follows:
+                </Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Clone Object:  Creates a new object identical to 
+                the selected object.  The Clone toolbar button also performs this function.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Split Object: If the selected object is a compound 
+                object, it will be split into its component objects.  This operation can also be accomplished with the Split
+                toolbar button.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Combine Objects:  all objects in the selected list
+                are combined to form a single compound object.  The rotation center of the new object will be the same as that 
+                of the first object in the selected list (i.e., of the selected object).</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Reset Object Transform:  resets the selected object 
+                to its original position and orientation.  This also reverses any previous scale or skew operations on 
+                the object.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Reset Group Transform: resets the transform for the group 
+                of objects.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Display Transform: displays the transform matrix for the 
+                selected object.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Remove:  Removes the selected object.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Color:</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Change Color:  Changes the color of the selected object to 
+                the color currently selected in the color selection box.  This can also be accomplished with the Change Color
+                toolbar button.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Custom Color:  Opens the custom color dialog.  The color hue,
+                saturation and value of the selected object can be independently adjusted.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Change BackColor:  Color of the back side of the
+                selected object is changed to the color currently selected in the color selection box.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Toggle Translucency:  toggles the selected object between 
+                solid and transparent.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Image:</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Add Image: Opens dialog to add an image (jpeg, bmp, gif)
+                to the selected object.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Remove Image:  Remove image from selected object.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Flip S: Flip image in s dimension.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Flip T: Flip image in t dimension.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Rotate Image: Rotate Image 90 degrees.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Toggle Tiling:  Toggle Tiling of Image.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Background:</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Move to Background: Moves the selected object to 
+                the background.  It will no longer be affected by manipulations of the group of objects, and will not be available 
+                for selection.  It will remain stationary during animation of the group.</Paragraph>
+                <Paragraph FontSize="14" Margin="50,0,0,10" TextIndent="-25">Retrieve All:  all objects in the background are retrieved 
+                to the object group, and become available for selection and manipulation.</Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold">The File Menu</Paragraph>
+                <Paragraph FontSize="14">The File Menu provides options for saving and opening Parameter 3D data files (*.p3d), creating
+                and opening Parameter 3D template files (*.p3t), saving image files (jpeg), and closing the program.  The available menu 
+                items are as follows.</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Save:  saves the current group of objects 
+                as a Parameter 3D data file (*.p3d)</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Open: opens a Parameter 3D data file and adds the 
+                objects from that file to the current group of objects</Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Create Template: opens a dialog which allows the user 
+                to create a new template for creating objects.  The template created will be stored as a Parameter 3D template file.
+                </Paragraph>
+                <Paragraph FontSize="14" Margin="25,0,0,10" TextIndent="-25">Open Template: opens a Parameter 3D template file, then 
+                displays a dialog that prompts the user to enter the required parameters for the template, as well as 
+                the desired color.  A 3D object is then generated and displayed.</Paragraph>
+                <Paragraph FontSize="14">Close: Close the program.</Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold">Lighting</Paragraph>
+                <Paragraph FontSize="14">When Parameter 3D is opened, the display includes only low level ambient lighting,
+                and any objects created will have a very dull appearance.  A more pleasing appearance can be achieved by 
+                adding spotlights and/or directional lights to the scene.  The control panel at the left side of the user interface
+                includes check boxes to turn on and off 6 different spotlights and 6 different directional lights.</Paragraph>
+                <Paragraph FontSize="16" FontWeight="Bold">The Camera</Paragraph>
+                <Paragraph FontSize="14">When Parameter 3D is opened, objects are displayed using an "Orthogonal Camera".  A "Zoom" 
+                slider allows the user to zoom in and out.  In the "Camera" section of the control panel, the camera can be changed 
+                to a "Perspective Camera", for which sliders allow adjustment of the zoom and the distance between the scene
+                and the camera.</Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        
+    </Grid>
+</Window>

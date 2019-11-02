@@ -1,0 +1,64 @@
+﻿<Window x:Class="Parameter3D.TemplateSurface"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="TemplateSurface" SizeToContent="WidthAndHeight" Background="Beige" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Label Name="lblSurfaceName" Grid.Row="0" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5">Surface Name</Label>
+        <TextBox Name="tbxSurfaceName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5"/>
+        <Label Name="lblX" Grid.Row="1" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5">x(s,t)=</Label>
+        <TextBox  Name="tbxXFunction" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" MinWidth="400" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,5,5"/>
+        <Label  Name="lblY" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5">y(s,t)=</Label>
+        <TextBox Name="tbxYFunction" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,5,5"/>
+        <Label  Name="lblZ" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5">z(s,t)=</Label>
+        <TextBox Name="tbxZFunction" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,5,5" />
+        <Label Name="lblXPrime" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5" IsEnabled="False">x'(s,t)=</Label>
+        <TextBox Name="tbxXPrimeFunction" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" IsEnabled="False" ></TextBox>
+        <Label Name="lblYPrime" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5" IsEnabled="False">y'(s,t)=</Label>
+        <TextBox Name="tbxYPrimeFunction" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" IsEnabled="False"></TextBox>
+        <Label Name="lblSMin" HorizontalAlignment="Stretch" Width="Auto" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0,5,0,5">Smin:</Label>
+        <TextBox Name="tbxSMin" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" MinWidth="50" Width="Auto" VerticalAlignment="Center" Margin="0,5,5,5"/>
+        <Label  Name="lblSMax" HorizontalAlignment="Center" Width="Auto" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Margin="0,5,0,5">Smax:</Label>
+        <TextBox Name="tbxSMax" Grid.Column="3" Grid.Row="6" MinWidth="100" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,5,5"/>
+        <Label Name="lblTMin" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" Margin="0,5,0,5">Tmin:</Label>
+        <TextBox Name="tbxTMin" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" MinWidth="50" Margin="0,5,5,5"/>
+        <Label Name="lblTMax" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="7" Grid.Column="2" Margin="0,5,0,5">Tmax:</Label>
+        <TextBox Name="tbxTMax" Grid.Column="3" Grid.Row="7" MinWidth="50" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,5,5"/>
+        <Label Name="lblGridSizeS" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" Margin="0,5,0,5">GridSize S:</Label>
+        <TextBox Name="tbxGridSizeS" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" MinWidth="50" Margin="0,5,5,5"/>
+        <Label Name="lblGridSizeT" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Grid.Column="2" Margin="0,5,0,5">T:</Label>
+        <TextBox Name="tbxGridSizeT" Grid.Column="3" Grid.Row="8" HorizontalAlignment="Stretch" VerticalAlignment="Center" MinWidth="50" Margin="0,5,5,5"/>
+        <CheckBox Name="cbxWrapS" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" Grid.Row="9" Grid.Column="0" Margin="5,5,5,5">Wrap S</CheckBox>
+        <CheckBox Name="cbxWrapT" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" Grid.Row="9" Grid.Column="1" Margin="5,5,5,5">Wrap T</CheckBox>
+        <CheckBox Name="cbxExtrusion" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="False" Grid.Row="9" Grid.Column="2" Margin="5" Checked="cbxExtrusion_Checked" Unchecked="cbxExtrusion_Unchecked" >Extrusion</CheckBox>
+        <Button Name="OKButton" Grid.Row="10" Grid.Column="1" Width="100" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OKButton_Click" Margin="0,5,0,5" >OK</Button>
+        <Button Name="CancelButton" Grid.Row="10" Grid.Column="2" Width="100" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" IsCancel="True" Margin="0,5,0,5">Cancel</Button>
+    </Grid>
+</Window>

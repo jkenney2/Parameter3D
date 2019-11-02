@@ -1,0 +1,42 @@
+﻿<Window x:Class="Parameter3D.CreateTemplatedialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="CreateTemplatedialog" SizeToContent="WidthAndHeight" Background="Beige" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="lblTemplateName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5" >Template Name:</Label>
+        <TextBox Name="tbxTemplateName" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,5"></TextBox>
+        <Label Name="lblDescription" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5">Description:</Label>
+        <TextBox Name="tbxDescription" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" MinHeight="50" MinWidth="400" AcceptsReturn="True" Margin="5,5,5,5"/>
+        <Label Name="lblParamNames" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5">Parameter Names</Label>
+        <Button Name="btnAddNames" Grid.Row="4" Grid.Column="1" Width="75" Height="25" HorizontalAlignment="Right" Click="btnAddNames_Click" Margin="5,5,5,5">Add Names:</Button>
+        <TextBox Name="tbxAddNames" Grid.Row="4" Grid.Column="2" MinWidth="75" HorizontalAlignment="Stretch" Margin="5,5,5,5"/>
+        <ListBox Name="lbxParamNames" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="1" MinHeight="50" MaxHeight="100" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,5" SelectionMode="Single"/>
+        <Button Name="btnDeleteName" Grid.Row="5" Grid.Column="1" Width="75" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,5,5,5" Click="btnDeleteName_Click">Delete Name</Button>
+        <Label Name="lblSurfaceList" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5">Surface List:</Label>
+        <ListBox Name="lbxSurfaceList" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="100" Margin="5,5,5,5" SelectionMode="Single"/>
+        <Button Name="btnAddSurface" Grid.Row="8" Grid.Column="0" Width="75" Height="25" HorizontalAlignment="Center" Click="btnAddSurface_Click" Margin="0,5,0,5">Add Surface</Button>
+        <Button Name="btnEditSurface" Grid.Row="8" Grid.Column="1" Width="75" Height="25" HorizontalAlignment="Center" Click="btnEditSurface_Click" Margin="0,5,0,5">Edit Surface</Button>
+        <Button Name="btnDeleteSurface" Grid.Row="8" Grid.Column="2" Width="90" Height="25" HorizontalAlignment="Center" Click="btnDeleteSurface_Click" Margin="0,5,0,5">Delete Surface</Button>
+        <Button Name="btnSave" Grid.Row="9" Grid.Column="1" Width="75" Height="25" HorizontalAlignment="Center" Click="btnSave_Click" Margin="5,5,5,5">Save</Button>
+        <Button Name="btnClose" Grid.Row="9" Grid.Column="2" Width="75" Height="25" HorizontalAlignment="Center" IsCancel="True" Margin="5,5,5,5">Close</Button>
+        <Button Name="btnFromFile" Grid.Row="9" Grid.Column="0" Width="75" Height="25" HorizontalAlignment="Center" Click="btnFromFile_Click" ToolTip="Open Template File" Margin="5,5,5,5">From File</Button>
+        
+    </Grid>
+</Window>

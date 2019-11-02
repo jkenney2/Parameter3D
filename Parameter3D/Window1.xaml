@@ -1,0 +1,278 @@
+﻿<Window x:Class="Parameter3D.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Parameter3D" Background="Beige" Loaded="Window_Loaded" ResizeMode="CanResize" SizeToContent="WidthAndHeight" 
+    MinWidth="900" MinHeight="650" Icon="DonutIcon.ico">
+    <DockPanel Name="dockPanel1" SnapsToDevicePixels="False"  ClipToBounds="True" HorizontalAlignment="Stretch">
+        <Grid Name="grid3" Background="Beige" HorizontalAlignment="Stretch" Height="Auto" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Menu Name="mainMenu" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0">
+                <MenuItem Header="File">
+                    <MenuItem Header="Save" Name="saveMenuItem" Click="saveMenuItem_Click" ToolTip="Save All Object Data to File"/>
+                    <MenuItem Header="Open" Name="openMenuItem" Click="openMenuItem_Click" ToolTip="Generate 3D Objects from Data File"/>
+                    <MenuItem Header="Save Image" Name="saveImageMenuItem" Click="saveImageMenuItem_Click" ToolTip="Save JPEG Image"/>
+                    <MenuItem Header="Create Template" Name="createTemplateMenuItem" Click="createTemplateMenuItem_Click" ToolTip="Create a new shape template"/>
+                    <MenuItem Header="Open Template" Name="openTemplateMenuItem" Click="openTemplateMenuItem_Click" ToolTip="Create shape from template"/>
+                    <MenuItem Header="Close" Name="closeMenuItem" Click="closeMenuItem_Click" ToolTip="Close Application"/>
+                </MenuItem>
+                <MenuItem Header="Object">
+                    <MenuItem Header="Clone Object" Name="cloneObjectMenuItem" Click="cloneObjectMenuItem_Click" ToolTip="Create a Copy of Selected Object"/>
+                    <MenuItem Header="Split Object" Name="splitObjectMenuItem" Click="splitObjectMenuItem_Click" ToolTip="Split Multi-surface Object into Components"/>
+                    <MenuItem Header="Combine Objects" Name="combineObjectsMenuItem" Click="combineObjectsMenuItem_Click" ToolTip="Combine all Objects into Single Object"/>
+                    <MenuItem Header="Reset Object Transform" Name="resetObjectTransformMenuItem" Click="resetObjectTransformMenuItem_Click" ToolTip="Reset Transform of Selected Object"/>
+                    <MenuItem Header="Reset Group Transform" Name="resetGroupTransformMenuItem" Click="resetGroupTransformMenuItem_Click" ToolTip="Reset Group Transform"/>
+                    <MenuItem Header="Display Transform" Name="displayTransformMenuItem" Click="displayTransformMenuItem_Click" ToolTip="Display Transform Matrix for Selected Object"/>
+                    <MenuItem Header="Remove" Name="removeObjectMenuItem" Click="btnRemoveModel_Click" ToolTip="Remove the Selected Object from Group"/>
+                    <MenuItem Header="Color" Name="colorMenuItem" ToolTip="Change Object Color or Back Color">
+                        <MenuItem Header="Change Color" Name="changeColorMenuItem" Click="changeColorMenuItem_Click" ToolTip="Change Selected Object Color to Current Color Selection"/>
+                        <MenuItem Header="Custom Color" Name="customColorMenuItem" Click="customColorMenuItem_Click" ToolTip="Select Custom Color (HSV) for Current Object"/>
+                        <MenuItem Header="Change Back Color" Name="changeBackColorMenuItem" Click="changeBackColorMenuItem_Click" ToolTip="Change Back Color of Selected Object to Current Color Selection"/>
+                        <MenuItem Header="Toggle Translucency" Name="toggleTranslucencyMenuItem" Click="toggleTranslucencyMenuItem_Click" ToolTip="Toggle Translucency of Selected Object"/>
+                    </MenuItem>
+                    <MenuItem Header="Image" Name="imageMenuItem" ToolTip="Add, Remove, or Transform Image of Selected Object">
+                        <MenuItem Header="Add Image" Name="addImageMenuItem" Click="addImageMenuItem_Click" ToolTip="Add Image to Selected Object"/>
+                        <MenuItem Header="Remove Image" Name="removeImageMenuItem" Click="removeImageMenuItem_Click" ToolTip="Remove Image from Selected Object"/>
+                        <MenuItem Header="Flip S" Name="flipSMenuItem" Click="transformImageEventHandler" ToolTip="Flip Image in S Dimension"/>
+                        <MenuItem Header="Flip T" Name="flipTMenuItem" Click="transformImageEventHandler" ToolTip="Flip Image in T Dimension"/>
+                        <MenuItem Header="Rotate" Name="rotateImageMenuItem" Click="transformImageEventHandler" ToolTip="Rotate Image"/>
+                        <MenuItem Header="Toggle Tiling" Name="toggleTilingMenuItem" Click="toggleTilingMenuItem_Click" ToolTip="Toggle Image Tiling"/>
+                    </MenuItem>
+                    <MenuItem Header="Background" Name="backgroundMenuItem" ToolTip="Move Objects to and from Background">
+                        <MenuItem Header="Move to Background" Name="moveToBackgroundMenuItem" Click="moveToBackgroundMenuItem_Click" ToolTip="Move Currently Selected Object to Backgroun"/>
+                        <MenuItem Header="Retrieve All" Name="retrieveAllMenuItem" Click="retrieveAllMenuItem_Click" ToolTip="Retrieve all objects from background"/>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Template" Name="templateMenuItem" MouseEnter="templateMenuItem_MouseEnter"></MenuItem>
+                <MenuItem Header="Shape" Name="shapeMenuItem" MouseEnter="ShapeMenuItem_MouseEnter"></MenuItem>
+                <MenuItem Header="Mode" ToolTip="Select Mode that defines behavior for moving mouse with left button down">
+                    <MenuItem Header="Rotate Object" Name="rotateObjectMenuItem" Click="ModeSelectItemHandler" ToolTip="Rotate Selected Object"/>
+                    <MenuItem Header="Rotate Group" Name="rotateGroupMenuItem" Click="ModeSelectItemHandler" IsChecked="True" ToolTip="Rotate Entire Group"/>
+                    <Separator/>
+                    <MenuItem Header="Drag" Name="dragMenuItem">
+                        <MenuItem Header="Object" Name="dragObjectMenuItem" Click="ModeSelectItemHandler" ToolTip="Drag Selected Object"/>
+                        <MenuItem Header="Group" Name="dragGroupMenuItem" Click="ModeSelectItemHandler" ToolTip="Drag Entire Group"/>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Scale" Name="scaleMenuItem">
+                        <MenuItem Header="Object" Name="scaleObjectMenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Selected Object"/>
+                        <MenuItem Header="Object X or Y or Z axis" Name="scaleXorYorZMenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Object in its X or Y or Z dimension"/>
+                        <MenuItem Header="Object X and Y axes" Name="scaleXandYMenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Object in its X and Y dimensions"/>
+                        <MenuItem Header="Object Z axis" Name="scaleZMenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Object in its Z dimension"/>
+                        <MenuItem Header="Group" Name="scaleGroupMenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Entire Group"/>
+                    </MenuItem>
+                    <MenuItem Header="Skew Object" Name="skewObjectMenuItem" Click="ModeSelectItemHandler" ToolTip="Skew selected object"/>
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem Header="Change Background Color" Name="changeBackgroundColorMenuItem" Click="changeBackgroundColorMenuItem_Click" ToolTip="Change Background Color to Current Color Selection"/>
+                    <MenuItem Header="Help" Name="helpMenuItem" Click="helpMenuItem_Click"/>
+                    <MenuItem Header="About" Name="aboutMenuItem" Click="aboutMenuItem_Click"/>
+                </MenuItem>
+            </Menu>
+            <ToolBar Grid.Row="1">
+                <Button Name="openTBItem" Background="Beige" Click="openMenuItem_Click" ToolTip="Open p3d object file">
+                    <Image Source="OpenFileIcon.gif" Height="32"/>
+                </Button>
+                <Button Name="saveTBItem" Background="Beige" Click="saveMenuItem_Click" ToolTip="Save group as p3d object file">
+                    <Image Source="SaveIcon.gif" Height="32"/>
+                </Button>
+                <Button Name="combineTBItem" Background="Beige" Click="combineObjectsMenuItem_Click" ToolTip="Combine all objects">
+                    <Image Source="JoinIcon.gif" Height="32"/>
+                </Button>
+                <Button Name="splitTBItem" Background="Beige" Click="splitObjectMenuItem_Click" ToolTip="Split current object">
+                    <Image Source="SplitIcon.gif" Height="32"/>
+                </Button>
+                <Button Name="cloneTBItem" Background="Beige" Click="cloneObjectMenuItem_Click" ToolTip="Clone current object">
+                    <Image Source="SheepIcon.gif" Height="32"/>
+                </Button>
+                <Button Name="removeTBItem" Background="Beige" Click="btnRemoveModel_Click" ToolTip="Remove current object from group">
+                    <Image Source="DeleteIcon.gif" Height="32"/>
+                </Button>
+                <Button Name="changeColorTBItem" Background="Beige" Click="changeColorMenuItem_Click" ToolTip="Change color of current object">
+                    <Image Source="ChangeColorIcon.gif" Height="32"/>
+                </Button>
+                <Button Name="animateButton" Background="Beige" Click="animateButton_Click">
+                    <Image Source="PlayStopIcon.gif" Height="32"/>
+                </Button>
+                <Separator/>
+                <Separator/>
+                <Button Name="blockTBItem" Click="shapeTBItem_Click" Tag="Block.p3d" ToolTip="Block with dimensions 2x1.5x1">
+                    <Image Source="RectangularBlock.bmp" Height="32"/>
+                </Button>
+                <Button Name="cubeTBItem" Click="shapeTBItem_Click" Tag="Cube.p3d" ToolTip="Cube with side length of 2">
+                    <Image Source="Cube.bmp" Height="32"/>
+                </Button>
+                <Button Name="cylinderTBItem" Click="shapeTBItem_Click" Tag="Cylinder.p3d" ToolTip="Cylinder with length 2, radius 1">
+                    <Image Source="Cylinder.bmp" Height="32"/>
+                </Button>
+                <Button Name="donutTBItem" Click="shapeTBItem_Click" Tag="Donut.p3d" ToolTip="Donut with major radius 0.8, minor radius 0.4">
+                    <Image Source="Donut.bmp" Height="32"/>
+                </Button>
+                <Button Name="ellipsoidTBItem" Click="shapeTBItem_Click" Tag="Ellipsoid.p3d" ToolTip="Ellipsoid with radii 1, 0.5, 0.5">
+                    <Image Source="Ellipsoid.bmp" Height="32"/>
+                </Button>
+                <Button Name="ogiveTBItem" Click="shapeTBItem_Click" Tag="Ogive.p3d" ToolTip="Ogive with length 2, radius 0.5">
+                    <Image Source="Ogive.bmp" Height="32"/>
+                </Button>
+                <Button Name="pyramidTBItem" Click="shapeTBItem_Click" Tag="Pyramid.p3d" ToolTip="Pyramid with base 2x2, height 1.5">
+                    <Image Source="Pyramid.bmp" Height="32"/>
+                </Button>
+                <Button Name="sphereTBItem" Click="shapeTBItem_Click" Tag="Sphere.p3d" ToolTip="Sphere with radius 1">
+                    <Image Source="Sphere.bmp" Height="32"/>
+                </Button>
+                <Button Name="tetrhedronTBItem" Click="shapeTBItem_Click" Tag="Tetrahedron.p3d" ToolTip="Tetrahedron with each side measuring 2">
+                    <Image Source="Tetrahedron.bmp" Height="32"/>
+                </Button>
+                <Button Name="capsuleTBItem" Click="shapeTBItem_Click" Tag="Capsule.p3d" ToolTip="Capsule with length 2, radius 1">
+                    <Image Source="Capsule.bmp" Height="32"/>
+                </Button>
+                <Button Name="teardropTBItem" Click="shapeTBItem_Click" Tag="Teardrop.p3d" ToolTip="Teardrop with length 2.5, radius 1">
+                    <Image Source="Teardrop.bmp" Height="32"/>
+                </Button>
+                <Button Name="eggTBItem" Click="shapeTBItem_Click" Tag="Egg.p3d" ToolTip="Egg with length 2.5, radius 1">
+                    <Image Source="Egg.bmp" Height="32"/>
+                </Button>
+                <Button Name="coneTBItem" Click="shapeTBItem_Click" Tag="Cone.p3d" ToolTip="Cone with radius 1, height 2.5">
+                    <Image Source="Cone.bmp" Height="32"/>
+                </Button>
+            </ToolBar>
+        </Grid>
+        <Grid Name="grid1" Background="Beige" MinWidth="300" Width="Auto" MaxWidth="500" DockPanel.Dock="Left" MinHeight="400">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Name="lblX" Grid.Row="0" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5">x(s,t)=</Label>
+            <TextBox  Name="tbxXFunction" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Width="300" HorizontalAlignment="Stretch" VerticalAlignment="Center" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <Label  Name="lblY" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="Auto" Margin="0,5,0,5">y(s,t)=</Label>
+            <TextBox Name="tbxYFunction" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Width="300" VerticalAlignment="Center" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <Label  Name="lblZ" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Margin="0,5,0,5">z(s,t)=</Label>
+            <TextBox Name="tbxZFunction" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Width="300" VerticalAlignment="Center" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5" ></TextBox>
+            <Label Name="lblXPrime" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5" IsEnabled="False">x'(s,t)=</Label>
+            <TextBox Name="tbxXPrimeFunction" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Width="300" VerticalAlignment="Center" MouseDoubleClick="TextBox_DoubleClick" Margin="5" IsEnabled="False" ></TextBox>
+            <Label Name="lblYPrime" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,5" IsEnabled="False">y'(s,t)=</Label>
+            <TextBox Name="tbxYPrimeFunction" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Width="300" VerticalAlignment="Center" MouseDoubleClick="TextBox_DoubleClick" Margin="5" IsEnabled="False"></TextBox>
+            <Label Name="lblSMin" HorizontalAlignment="Stretch" Width="Auto" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0,5,0,5">Smin:</Label>
+            <TextBox Name="tbxSMin" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" MinWidth="50" Width="100" VerticalAlignment="Center" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <Label  Name="lblSMax" HorizontalAlignment="Center" Width="Auto" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Margin="0,5,0,5">Smax:</Label>
+            <TextBox Name="tbxSMax" Grid.Column="3" Grid.Row="5" MinWidth="50" HorizontalAlignment="Left" Width="100" VerticalAlignment="Center" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <Label Name="lblTMin" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Margin="0,5,0,5">Tmin:</Label>
+            <TextBox Name="tbxTMin" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <Label Name="lblTMax" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="2" Margin="0,5,0,5">Tmax:</Label>
+            <TextBox Name="tbxTMax" Grid.Column="3" Grid.Row="6" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <Label Name="lblGridSizeS" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" Margin="0,5,0,5">GridSize S:</Label>
+            <TextBox Name="tbxGridSizeS" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <Label Name="lblGridSizeT" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="7" Grid.Column="2" Margin="0,5,0,5">T:</Label>
+            <TextBox Name="tbxGridSizeT" Grid.Column="3" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <CheckBox Name="cbxExtrusion" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="False" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Checked="cbxExtrusion_Checked" Unchecked="cbxExtrusion_Unchecked">Extrusion</CheckBox>
+            <Label Name="lblName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8"   Grid.Column="2" Margin="5">Name:</Label>
+            <TextBox Name="tbxName" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="8" Grid.Column="3" Width="100" KeyDown="tbxName_KeyDown" MouseDoubleClick="TextBox_DoubleClick" Margin="0,5,5,5"></TextBox>
+            <Label Name="lblColor" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" Margin="0,5,0,5">Color</Label> 
+            <ComboBox Name="comboboxColor" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" MinWidth="100" Margin="5"/>
+            <GroupBox Name="gbxHighlight" Header="Highlght" HorizontalAlignment="Stretch" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid Name="grdHighlight" HorizontalAlignment="Stretch" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton Name ="rbnNoHighlight" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="HighlightEventHandler" IsChecked="True" Margin="5">None</RadioButton>
+                    <RadioButton Name="rbnSelectionHighlight" Grid.Column="1" VerticalAlignment="Center"    HorizontalAlignment="Center" Click="HighlightEventHandler" Margin="5">Selection</RadioButton>
+                    <RadioButton Name="rbnListHighlight" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="HighlightEventHandler" Margin="5">List</RadioButton>
+                </Grid>
+            </GroupBox>
+            <Button Name="btnRemoveModel" Click="btnRemoveModel_Click" Grid.Row="10" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Center" MinWidth="75" VerticalAlignment="Center" Margin="5">Remove</Button>
+            <Button Name="btnAddModel" Click="btnAddModel_Click" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11" HorizontalAlignment="Center" MinWidth="75" VerticalAlignment="Center" Margin="5,5,5,5">Add Model</Button>
+            <Button Name="btnReset" Click="btnReset_Click" Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" MinWidth="75" VerticalAlignment="Center" Margin="5,5,5,5">Reset</Button>
+            <Label Name="lblSpotLights" Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5,5,5,5">Spot Lights</Label>
+            <Label Name="lblDirectionalLights" Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5">Directional Lignts</Label>
+            <CheckBox Name="cbxSpot0" Click="cbxSpot_Click" Grid.Row="13" Grid.Column="0" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+            <CheckBox  Name="cbxSpot1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cbxSpot_Click" Grid.Row="13" Grid.Column="1" Margin="5,5,5,5"></CheckBox>
+            <CheckBox Name="cbxDir0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cbxDirectional_Click" Grid.Row="13" Grid.Column="2" Margin="5"/>
+            <CheckBox Name="cbxDir1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cbxDirectional_Click" Grid.Row="13" Grid.Column="3" Margin="5"/>
+            <CheckBox Name="cbxSpot2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cbxSpot_Click" Grid.Column="0" Grid.Row="14" Margin="5"></CheckBox>
+            <CheckBox Name="cbxSpot3" Click="cbxSpot_Click" Grid.Column="1" Grid.Row="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"></CheckBox>
+            <CheckBox Name="cbxDir2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cbxDirectional_Click" Grid.Row="14" Grid.Column="2" Margin="5"/>
+            <CheckBox Name="cbxDir3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cbxDirectional_Click" Grid.Row="14" Grid.Column="3" Margin="5"/>
+            <CheckBox  Name="cbxSpot4" HorizontalAlignment="Center" Click="cbxSpot_Click" Grid.Row="15" Grid.Column="0" Margin="5,5,5,5" VerticalAlignment="Center"></CheckBox>
+            <CheckBox Name="cbxSpot5" HorizontalAlignment="Center" Click="cbxSpot_Click" Grid.Column="1" Grid.Row="15" Margin="5" VerticalAlignment="Center"></CheckBox>
+            <CheckBox Name="cbxDir4" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cbxDirectional_Click" Grid.Row="15" Grid.Column="2" Margin="5"/>
+            <CheckBox Name="cbxDir5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="cbxDirectional_Click" Grid.Row="15" Grid.Column="3" Margin="5"/>
+            <Label Name="lblCamera" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="16" Grid.Column="0" Margin="5">Camera</Label>
+            <RadioButton  Name="btnPerspectiveCamera" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="16" Grid.Column="1" Margin="5" Checked="CameraEventHandler">Perspective</RadioButton>
+            <RadioButton Name="btnOrthographicCamera" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="16" Grid.Column="2" Margin="5" IsChecked="True" Checked="CameraEventHandler">Orthographic</RadioButton>
+            <Label Name="lblZoom" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="17" Grid.Column="0" Margin="5">Zoom</Label>
+            <Slider Name="sldZoom" VerticalAlignment="Center" Grid.Row="17" Grid.Column="1"  Grid.ColumnSpan="2" Margin="5" Maximum="10" Minimum="0" Value="5" ValueChanged="CameraEventHandler"/>
+            <Label Name="lblDistance" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="18" Grid.Column="0" Margin="5" IsEnabled="False">Distance</Label>
+            <Slider Name="sldDistance" VerticalAlignment="Center" Grid.Row="18" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Minimum="5" Maximum="25" IsEnabled="False" Value="15" ValueChanged="CameraEventHandler"/>
+        </Grid>
+        <Grid Name="grid2" Background="Black"  Width="Auto" Height="Auto" DockPanel.Dock="Right" 
+              MouseLeftButtonDown="grid2_MouseLeftButtonDown" MouseLeftButtonUp="grid2_MouseLeftButtonUp"
+              MouseMove="grid2_MouseMove"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Rotate Object" Name="rotateObjectCmenuItem" Click="ModeSelectItemHandler"/>
+                    <MenuItem Header="Rotate Group" Name="rotateGroupCmenuItem" Click="ModeSelectItemHandler" IsChecked="True"/>
+                    <Separator/>
+                    <MenuItem Header="Drag" Name="dragCmenuItem">
+                        <MenuItem Header="Object" Name="dragObjectCmenuItem" Click="ModeSelectItemHandler" />
+                        <MenuItem Header="Group" Name="dragGroupCmenuItem" Click="ModeSelectItemHandler"/>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Scale" Name="scaleCmenuItem">
+                        <MenuItem Header="Object" Name="scaleObjectCmenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Selected Object"/>
+                        <MenuItem Header="Object X or Y or Z axis" Name="scaleXorYorZCmenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Object in its X or Y or Z dimension"/>
+                        <MenuItem Header="Object X and Y axes" Name="scaleXandYCmenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Object in its X and Y dimensions"/>
+                        <MenuItem Header="Object Z axis" Name="scaleZCmenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Object in its Z dimension"/>
+                        <MenuItem Header="Group" Name="scaleGroupCmenuItem" Click="ModeSelectItemHandler" ToolTip="Resize Entire Group"/>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Skew Object" Name="skewObjectCmenuItem" Click="ModeSelectItemHandler"/>
+                </ContextMenu>
+            </Grid.ContextMenu>
+            <Viewport3D Name="viewPort" MinWidth="600" MinHeight="600" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <Viewport3D.Camera>
+                    <OrthographicCamera Position="0,0,10" LookDirection="0,0,-1" Width="7"/>
+                </Viewport3D.Camera>
+                <Viewport3D.Children>
+                    <ModelVisual3D>
+                        <ModelVisual3D.Content>
+                            <AmbientLight Color="#404040"/>
+                        </ModelVisual3D.Content>
+                    </ModelVisual3D>
+                </Viewport3D.Children>
+            </Viewport3D>
+        </Grid>
+    </DockPanel>
+</Window>
