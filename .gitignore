@@ -18,25 +18,22 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/*
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-
-[Bb]in/*
-!bin/Debug/
-bin/Debug/*
-!bin/Debug/StockPSDFiles/
-!bin/Debug/Templates/
-
 
 [Oo]bj/
-[Ll]og/
+
+Parameter3D/bin/*
+!Parameter3D/bin/Debug
+Parameter3D/bin/Debug/*
+!Parameter3D/bin/Debug/StockPSDFiles/
+!Parameter3D/bin/Debug/Templates
+
+P3DSetup/*
+!P3DSetup/P3DSetup.vdproj
+
+[Rr]elease/
+
+
+
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
