@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameter3D", "Parameter3D\Parameter3D.csproj", "{61CD4A64-B956-4121-9595-19BAFEF189C6}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Parameter3DSetup", "Parameter3DSetup\Parameter3DSetup.vdproj", "{2760A718-0676-420D-ACBC-65DB0A31710B}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "P3DSetup", "P3DSetup\P3DSetup.vdproj", "{4B9F18D6-42FD-40DF-81AA-35DD72A33580}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,13 @@ Global
 		{61CD4A64-B956-4121-9595-19BAFEF189C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61CD4A64-B956-4121-9595-19BAFEF189C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61CD4A64-B956-4121-9595-19BAFEF189C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2760A718-0676-420D-ACBC-65DB0A31710B}.Debug|Any CPU.ActiveCfg = Debug
-		{2760A718-0676-420D-ACBC-65DB0A31710B}.Release|Any CPU.ActiveCfg = Release
+		{4B9F18D6-42FD-40DF-81AA-35DD72A33580}.Debug|Any CPU.ActiveCfg = Debug
+		{4B9F18D6-42FD-40DF-81AA-35DD72A33580}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE7D0D61-F854-4B7D-AE9E-2A3EC1B6AC07}
 	EndGlobalSection
 EndGlobal

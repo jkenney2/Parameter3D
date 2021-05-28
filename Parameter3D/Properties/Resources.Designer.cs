@@ -19,7 +19,7 @@ namespace Parameter3D.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,21 +57,6 @@ namespace Parameter3D.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parameter3D Instructions
-        ///
-        ///Parameter3D creates 3D objects based on parametric equations, and allows the user to manipulate individual objects or the entire group of objects.
-        ///
-        ///The simplest way to create a 3D object is with the Shape Toolbar.  Select a color in the Color Selection Box, then click on the desired shape on the toolbar.  This will create a shape with no input of parameters.
-        ///
-        ///The &quot;Templates&quot; menu allows the user to quickly select one of the many shape templates that are installed during setup [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string Parameter3DInstructions {
-            get {
-                return ResourceManager.GetString("Parameter3DInstructions", resourceCulture);
             }
         }
     }
